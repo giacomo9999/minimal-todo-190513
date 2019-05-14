@@ -34,7 +34,16 @@ class Todo extends Component {
   };
 
   onDeleteHandle(e) {
-    e.preventDefault();
+    // e.preventDefault();
+    console.log(arguments);
+    let id = arguments[0];
+    this.setState({
+      mockData: this.state.mockData.filter(item => {
+        if (item.id !== id) {
+          return item;
+        }
+      })
+    });
   }
 
   onEditHandle(e) {
@@ -61,10 +70,27 @@ class Todo extends Component {
     e.target.item.value = "";
   }
 
+  renderEditForm() {
+    if (this.state.edit) {
+      return (
+        <form onSubmit={this.onUpdateHandle.bind(this)}>
+          <input
+            type="text"
+            name="updatedItem"
+            className="item"
+            defaultValue={this.state.title}
+          />
+          <button className="update-add-item">Update</button>
+        </form>
+      );
+    }
+  }
+
   render() {
     console.log(this.state);
     return (
       <div>
+        {this.renderEditForm()}
         <form onSubmit={this.onSubmitHandle.bind(this)}>
           <input type="text" name="item" className="item" />
           <button className="btn-add-item">Add</button>
