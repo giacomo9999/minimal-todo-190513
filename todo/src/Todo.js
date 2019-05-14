@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./App.css";
 
 class Todo extends Component {
   state = {
@@ -46,9 +47,22 @@ class Todo extends Component {
 
   onSubmitHandle(e) {
     e.preventDefault();
+    this.setState({
+      mockData: [
+        ...this.state.mockData,
+        {
+          id: Date.now(),
+          title: e.target.item.value,
+          done: false,
+          date: new Date()
+        }
+      ]
+    });
+    e.target.item.value = "";
   }
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <form onSubmit={this.onSubmitHandle.bind(this)}>
