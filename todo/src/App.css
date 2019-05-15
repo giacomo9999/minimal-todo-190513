@@ -19,5 +19,9 @@ h1 {
 }
 
 .item {
-  background-color:#C0C0C0;
+  background-color: #c0c0c0;
+}
+
+.done {
+  text-decoration: line-through;
 }
