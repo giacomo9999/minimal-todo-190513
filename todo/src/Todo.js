@@ -39,9 +39,7 @@ class Todo extends Component {
     let id = arguments[0];
     this.setState({
       mockData: this.state.mockData.filter(item => {
-        if (item.id !== id) {
-          return item;
-        }
+        return item.id !== id;
       })
     });
   }
@@ -51,8 +49,8 @@ class Todo extends Component {
     console.log("onEditHandle working for element with ID#", arguments[0]);
     this.setState({
       edit: true,
-      id: arguments[0]
-      // title: arguments[1]
+      id: arguments[0],
+      title: arguments[1]
     });
     console.log(this.state);
   }
@@ -63,7 +61,6 @@ class Todo extends Component {
       mockData: this.state.mockData.map(item => {
         if (item.id === this.state.id) {
           item.title = e.target.updatedItem.value;
-          // return item;
         }
         return item;
       })
@@ -133,7 +130,9 @@ class Todo extends Component {
               <button onClick={this.onDeleteHandle.bind(this, item.id)}>
                 Delete
               </button>
-              <button onClick={this.onEditHandle.bind(this, item.id)}>
+              <button
+                onClick={this.onEditHandle.bind(this, item.id, item.title)}
+              >
                 Edit
               </button>
               <button onClick={this.onCompleteHandle.bind(this, item.id)}>
